@@ -1,0 +1,19 @@
+.container-filter {
+    display: flex;
+    background-color: red;
+    justify-content: center;
+    height: 3rem;
+    align-items: center;
+}
+
+.filter {
+    margin-right: 3rem;
+    margin-left: 3rem;
+}
+
+.container-card {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
