@@ -1,0 +1,18 @@
+.button {
+    height: 10vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.container-detail {
+    height: 90vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.element-detail {
+    width: 50vh;
+    flex-direction: row;
+}

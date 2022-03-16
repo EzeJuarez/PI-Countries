@@ -21,10 +21,9 @@ const reducer = (state = initialState, action) => {
                 countries: action.payload,
             };
         case GET_DETAIL:
-            const allActivities = action.payload;
             return {
                 ...state,
-                detail: allActivities,
+                detail: action.payload,
             };
         case GET_ACTIVITIES:
             return {
@@ -40,16 +39,14 @@ const reducer = (state = initialState, action) => {
             };
         case FILTER_BY_ACTIVITY:
             const filteredCountries2 = state.allCountries;
-            let activityFiltered = [];
-            for(let i = 0; i < filteredCountries2.length; i++) {
-                for(let j = 0; j < filteredCountries2[i].activities.length; i++) {
-                    return activityFiltered = filteredCountries2.filter(e => e.activities[j].name === action.payload);
-                };
-                //     activityFilter = filteredCountries2.filter(e => e.activities[i].name === action.payload);
-            };
+            const activityFiltered = filteredCountries2.filter(e => {
+                const activities = e.activities.map(el => el.name);
+                return activities.includes(action.payload);
+            });
+            const countriesWithActivities = filteredCountries2.filter(e => e.activities.length > 0);
             return {
                 ...state,
-                countries: activityFiltered,
+                countries: action.payload === "All" ? countriesWithActivities : activityFiltered,
             };
         case FILTER_SORT:
             const sortCountries = action.payload === "A-Z" ?

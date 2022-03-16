@@ -13,10 +13,15 @@ export default function Home() {
     const allActivities = useSelector(state => state.activities);
     const [ , setOrder ] = useState("");
     const [ currentPage, setCurrentPage ] = useState(1);
-    const [ countriesPerPage ] = useState(10);
+    const [ countriesPerPage ] = useState(9);
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-    const currentCountries = allCountries.slice(indexOfFirstCountry, indexOfLastCountry);
+    let currentCountries = [];
+    if(currentPage === 1) {
+        currentCountries = allCountries.slice(0, 10);
+    }else {
+        currentCountries = allCountries.slice((indexOfFirstCountry + 1), (indexOfLastCountry + 1));
+    };
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -56,10 +61,8 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Todos los países del mundo</h1>
-            <SearchBar />
-            <Link to="/activity"><button>Crear actividad</button></Link>
-            <button onClick={e => {onClick(e)}}>Volver a cargar todos los países</button>
+            <button onClick={e => {onClick(e)}}>Load all countries again</button>
+            <Link to="/activity"><button>Create activity</button></Link>
             <div className="container-filter">
                 <div className="filter">
                     <span>Filter by continent</span>
@@ -78,7 +81,7 @@ export default function Home() {
                     <span>Filter by activity</span>
                     <select onChange={e => {handleFilterByActivity(e)}}>
                         <option value="All">All</option>
-                        { allActivities ? allActivities.map(e => <option value={e.name}>{e.name}</option>) : <option>Not found</option> }
+                        { allActivities ? allActivities.map((e, i) => <option key={i} value={e.name}>{e.name}</option>) : <option>Not found</option> }
                     </select>
                 </div>
                 <div className="filter">
@@ -97,9 +100,10 @@ export default function Home() {
                 </div>
             </div>
             <div>
+                <SearchBar />
                 <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
                 <div className="container-card">
-                    { currentCountries?.map(e => <Link to={"/home/" + e.cca3}><Card key={e.cca3} cca3={e.cca3} name={e.name} image={e.flags[0]} continent={e.continent} population={e.population} /></Link>) }
+                    { currentCountries?.map((e, i) => <Link key={i} to={"/home/" + e.cca3}><Card key={e.cca3} cca3={e.cca3} name={e.name} image={e.flags[0]} continent={e.continent} population={e.population} /></Link>) }
                 </div>
             </div>
         </div>

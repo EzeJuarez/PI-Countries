@@ -1,3 +1,4 @@
+import './styles/ActivityCreate.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector  } from 'react-redux';
@@ -6,15 +7,15 @@ import { getAllCountries, postActivity } from '../redux/actions';
 function validates(input) {
     let error = {};
     if(!input.name) {
-        error.name = "Este campo es obligatorio";
+        error.name = "This is required";
     }else if(!input.difficulty) {
-        error.difficulty = "Este campo es obligatorio";
+        error.difficulty = "Must select the difficulty";
     }else if(!input.duration) {
-        error.duration = "Este campo es obligatorio";
+        error.duration = "This is required";
     }else if(!input.season) {
-        error.season = "Este campo es obligatorio";
-    }else if(!input.country.length === 0) {
-        error.country = "Este campo es obligatorio";
+        error.season = "Must select the season";
+    }else if(input.country.length === 0) {
+        error.country = "Must select at least one country";
     };
     return error;
 };
@@ -27,10 +28,16 @@ export default function ActivityCreate() {
         name: "",
         difficulty: 0,
         duration: "",
-        season: "",
+        season: [],
         country: [],
     });
-    const [ error, setError ] = useState({});
+    const [ error, setError ] = useState({
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
+        country: "",
+    });
 
     useEffect(() => {
         dispatch(getAllCountries());
@@ -54,6 +61,20 @@ export default function ActivityCreate() {
             });
         };
     };
+    function onSelectSeason(e) {
+        if(e.target.checked) {
+            setInput({
+                ...input,
+                season: [...input.season, e.target.value],
+            });
+        };
+        if(!e.target.checked) {
+            setInput({
+                ...input,
+                season: input.season.filter(el => el !== e.target.value),
+            });
+        };
+    };
     function onSelect(e) {
         setInput({
             ...input,
@@ -62,64 +83,80 @@ export default function ActivityCreate() {
     };
     function onSubmit(e) {
         e.preventDefault();
-        dispatch(postActivity(input));
-        setInput({
-            name: "",
-            difficulty: 0,
-            duration: "",
-            season: "",
-            country: [],
-        });
-        alert("La actividad fue creada");
-        history.push("/home");
+        if(!error.name && !error.difficulty && !error.duration && !error.season && !error.country) {
+            dispatch(postActivity(input));
+            setInput({
+                name: "",
+                difficulty: 0,
+                duration: "",
+                season: [],
+                country: [],
+            });
+            alert("Activity created");
+            history.push("/home");
+        }else {
+            alert("Compleat all");
+        };
     };
+    function onDelete(e) {
+        e.preventDefault();
+        setInput({
+            ...input,
+            country: input.country.filter(el => el !== e.target.value),
+        });
+    };
+    console.log(input);
 
     return (
         <div>
-            <Link to="/home"><button>Volver</button></Link>
-            <h1>Crear actividad</h1>
+            <Link to="/home"><button>Back</button></Link>
+            <h1>Create activity</h1>
             <form onSubmit={e => {onSubmit(e)}}>
                 <div>
-                    <label>Nombre:</label>
+                    <label>Name: </label>
                     <input type="text" name="name" value={input.name} onChange={e => {onChange(e)}} />
                     { error.name && <p>{error.name}</p> }
                 </div>
                 <div>
-                    <label>Dificultad:</label>
+                    <label>Difficulty: </label>
                     <label>1</label>
-                    <input type="checkbox" name="difficulty" value="1" onChange={e => {onCheck(e)}} />
+                    <input type="radio" name="difficulty" value="1" onChange={e => {onCheck(e)}} />
                     <label>2</label>
-                    <input type="checkbox" name="difficulty" value="2" onChange={e => {onCheck(e)}} />
+                    <input type="radio" name="difficulty" value="2" onChange={e => {onCheck(e)}} />
                     <label>3</label>
-                    <input type="checkbox" name="difficulty" value="3" onChange={e => {onCheck(e)}} />
+                    <input type="radio" name="difficulty" value="3" onChange={e => {onCheck(e)}} />
                     <label>4</label>
-                    <input type="checkbox" name="difficulty" value="4" onChange={e => {onCheck(e)}} />
+                    <input type="radio" name="difficulty" value="4" onChange={e => {onCheck(e)}} />
                     <label>5</label>
-                    <input type="checkbox" name="difficulty" value="5" onChange={e => {onCheck(e)}} />
+                    <input type="radio" name="difficulty" value="5" onChange={e => {onCheck(e)}} />
+                    { error.difficulty && <p>{error.difficulty}</p> }
                 </div>
                 <div>
-                    <label>Duración:</label>
+                    <label>Duration: </label>
                     <input type="text" value={input.duration} name="duration" onChange={e => {onChange(e)}} />
+                    { error.duration && <p>{error.duration}</p> }
                 </div>
                 <div>
-                    <label>Temporada:</label>
-                    <label>Verano</label>
-                    <input type="checkbox" name="season" value="Verano" onChange={e => {onCheck(e)}} />
-                    <label>Otoño</label>
-                    <input type="checkbox" name="season" value="Otoño" onChange={e => {onCheck(e)}} />
-                    <label>Invierno</label>
-                    <input type="checkbox" name="season" value="Invierno" onChange={e => {onCheck(e)}} />
-                    <label>Primavera</label>
-                    <input type="checkbox" name="season" value="Primavera" onChange={e => {onCheck(e)}} />
+                    <label>Season: </label>
+                    <label>Summer</label>
+                    <input type="checkbox" name="season" value="Summer" onChange={e => {onSelectSeason(e)}} />
+                    <label>Fall</label>
+                    <input type="checkbox" name="season" value="Fall" onChange={e => {onSelectSeason(e)}} />
+                    <label>Winter</label>
+                    <input type="checkbox" name="season" value="Winter" onChange={e => {onSelectSeason(e)}} />
+                    <label>Spring</label>
+                    <input type="checkbox" name="season" value="Spring" onChange={e => {onSelectSeason(e)}} />
+                    { error.season && <p>{error.season}</p> }
                 </div>
                 <div>
-                    <label>Países:</label>
+                    <label>Countries: </label>
                     <select onChange={e => {onSelect(e)}}>
                         { countries?.map(e => <option key={e.cca3} value={e.name}>{e.name}</option>) }
                     </select>
-                    <ul><li>{ input.country.map(e => e + ". ") }</li></ul>
+                    <ul>{ input.country.map((e, i) => <li key={i}>{e} <button value={e} onClick={e =>{onDelete(e)}}>x</button></li>) }</ul>
+                    { error.country && <p>{error.country}</p> }
                 </div>
-                <button type="submit">Crear</button>
+                <button type="submit">Create</button>
             </form>
         </div>
     );

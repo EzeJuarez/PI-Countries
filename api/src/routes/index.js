@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { Country, Activity, countries_activities } = require('../db');
-const models = require('./model');
+const axios = require('axios');
+const { Country, Activity } = require('../db');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -10,6 +10,24 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+const getCountriesInfo = async function() {
+    const apiInfo = await axios.get('https://restcountries.com/v3/all');
+    apiInfo.data.forEach(e => {
+        Country.findOrCreate({
+            where: {
+                cca3: e.cca3,
+                name: e.name.common,
+                flags: e.flags,
+                continent: e.continents[0],
+                capital: e.capital ? e.capital[0] : "No tiene capital",
+                subregion: e.subregion ? e.subregion : "Sin información",
+                area: e.area + " km2",
+                population: e.population,
+            },
+        });
+    });
+}();
+
 router.get("/countries", async (req, res) => {
     const name = req.query.name;
     const countries = await Country.findAll({ order: [ [ "name", "ASC" ] ] });
@@ -17,30 +35,25 @@ router.get("/countries", async (req, res) => {
     if(countries.length > 0) {
         if(name) {
             const countryInfo = countries.filter(country => country.name.toLowerCase().includes(name.toLowerCase()));
-
-            // actividades
-            const detail = countryInfo.map(e => {
-                return {
-                    cca3: e.cca3,
-                    name: e.name,
-                    flags: e.flags,
-                    continent: e.continent,
-                    capital: e.capital,
-                    subregion: e.subregion,
-                    area: e.area,
-                    population: e.population,
-                    activities: activitiesDb.filter(el => el.country.includes(e.name)),
-                };
-            });
-            // actividades
-
-            if(detail.length > 0) {
-                res.json(detail);
+            if(countryInfo.length > 0) {
+                const detail = countryInfo.map(e => {
+                    return {
+                        cca3: e.cca3,
+                        name: e.name,
+                        flags: e.flags,
+                        continent: e.continent,
+                        capital: e.capital,
+                        subregion: e.subregion,
+                        area: e.area,
+                        population: e.population,
+                        activities: activitiesDb.filter(el => el.country.includes(e.name)),
+                    };
+                });
+                res.status(200).json(detail);
             }else {
                 res.status(404).json({ msg: `No se encontró ningún país que coincida con el nombre: ${name}` });
             };
         }else {
-            // actividades
             const countryInfo = countries.map(e => {
                 return {
                     cca3: e.cca3,
@@ -54,8 +67,7 @@ router.get("/countries", async (req, res) => {
                     activities: activitiesDb.filter(el => el.country.includes(e.name)),
                 };
             });
-            // actividades
-            res.json(countryInfo);
+            res.status(200).json(countryInfo);
         };
     }else {
         res.status(404).json({ msg: "Ocurrió un error en la llamada de la información" });
@@ -69,30 +81,26 @@ router.get("/countries/:cca3", async (req, res) => {
     if(countries.length > 0) {
         if(cca3) {
             const countryInfo = countries.filter(country => country.cca3.toLowerCase().includes(cca3.toLowerCase()));
-
-            // actividades
-            const detail = countryInfo.map(e => {
-                return {
-                    cca3: e.cca3,
-                    name: e.name,
-                    flags: e.flags,
-                    continent: e.continent,
-                    capital: e.capital,
-                    subregion: e.subregion,
-                    area: e.area,
-                    population: e.population,
-                    activities: activitiesDb.filter(el => el.country.includes(e.name)),
-                };
-            });
-            // actividades
-
-            if(detail.length > 0) {
-                res.json(detail);
+            if(countryInfo.length > 0) {
+                const detail = countryInfo.map(e => {
+                    return {
+                        cca3: e.cca3,
+                        name: e.name,
+                        flags: e.flags,
+                        continent: e.continent,
+                        capital: e.capital,
+                        subregion: e.subregion,
+                        area: e.area,
+                        population: e.population,
+                        activities: activitiesDb.filter(el => el.country.includes(e.name)),
+                    };
+                });
+                res.status(200).json(detail);
             }else {
                 res.status(404).json({ msg: `No se encontró ningún país que contenga el código: ${cca3}` });
             };
         }else {
-            res.json(countries);
+            res.status(200).json(countries);
         };
     }else {
         res.status(404).json({ msg: "Ocurrió un error en la llamada de la información" });
@@ -112,12 +120,12 @@ router.post("/activity", async (req, res) => {
         where: { name: country },
     });
     newActivity.addCountries(countriesInDb);
-    res.json({ msg: "Actividad creada corectamente" });
+    res.status(200).json({ msg: "Actividad creada corectamente" });
 });
 
 router.get("/activities", async (req, res) => {
     const actividades = await Activity.findAll();
-    res.json(actividades);
+    res.status(200).json(actividades);
 });
 
 module.exports = router;
