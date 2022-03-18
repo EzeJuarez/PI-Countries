@@ -14,15 +14,15 @@ export default function Detail(props) {
 
     return (
         <div>
-            <div className="button">
+            <div className="container-button">
                 <Link to="/home"><button>Back</button></Link>
             </div>
             { myCountry.length > 0 ?
                 <div className="container-detail">
-                    <div className="element-detail">
+                    <div className="image-detail">
                         <img alt ="img" src={myCountry[0].flags[1]} />
                     </div>
-                    <div className="element-detail">
+                    <div className="country-detail">
                         <h1>Name: {myCountry[0].name}</h1>
                         <h3>Country code: {myCountry[0].cca3}</h3>
                         <h3>Continent: {myCountry[0].continent}</h3>
@@ -31,27 +31,28 @@ export default function Detail(props) {
                         <h3>Area: {myCountry[0].area}</h3>
                         <h3>Population: {myCountry[0].population}</h3>
                     </div>
-                    <div className="element-detail">
-                        {
-                            myCountry[0].activities.length > 0 &&
+                    { myCountry[0].activities.length > 0 &&
+                        <div className="container-activity-detail">
                             <h2>Activities:</h2>
-                        }
-                        { myCountry[0].activities.length > 0 &&
-                            myCountry[0].activities.map(e => {
-                                return (
-                                    <div key={e.id}>
-                                        <h5>Name: {e.name}</h5>
-                                        <h5>Difficulty: {e.difficulty}</h5>
-                                        <h5>Duration: {e.duration}</h5>
-                                        <h5>Season: {e.season}</h5>
-                                    </div>
-                                );
-                            })
-                        }
+                            <div className="activity-detail">
+                                { myCountry[0].activities.length > 0 &&
+                                    myCountry[0].activities.map(e => {
+                                        return (
+                                            <div key={e.id} className="activity">
+                                                <h5>Name: {e.name}</h5>
+                                                <h5>Difficulty: {e.difficulty}</h5>
+                                                <h5>Duration: {e.duration}</h5>
+                                                <h5>Season: {e.season.map(e => e + ". ")}</h5>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </div>
+                    }
                     </div>
-                </div>
                 :
-                <p>Loading...</p>
+                <p className="loading">Loading...</p>
             }
         </div>
     );

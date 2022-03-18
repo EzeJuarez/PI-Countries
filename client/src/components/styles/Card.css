@@ -1,13 +1,25 @@
 .card {
     height: 23rem;
     width: 18rem;
-    background-color: yellow;
-    margin: 2rem;
+    background-color: #aaae;
+    border: .2rem solid #fff;
+    border-radius: 1rem;
     align-items: center;
+    margin: 2rem;
+}
+
+.card:hover {
+    background-color: #dddd;
+    transition: .2s;
 }
 
 .card img {
     margin-top: 1rem;
     height: 10rem;
     width: 15rem;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
 }

@@ -1,0 +1,37 @@
+* {
+    font-family: Calibri;
+}
+
+.container-landingPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0, -10%);
+}
+
+.container-landingPage .title {
+    height: 4rem;
+    width: 20rem;
+    background-color: #fffd;
+    border: .2rem solid #000;
+    font-size: 3rem;
+    border-radius: 2rem;
+}
+
+.container-landingPage .button {
+    height: 3rem;
+    width: 8rem;
+    background: #000e;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: 2rem;
+    font-size: 2rem;
+}
+
+.container-landingPage .button:hover {
+    cursor: pointer;
+    background: #111e;
+    transition: .2s;
+}

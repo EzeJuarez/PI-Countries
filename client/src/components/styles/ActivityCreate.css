@@ -1,0 +1,124 @@
+.container-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-button-back {
+    display: flex;
+    height: 20vh;
+    align-items: center;
+}
+
+.container-create-activity {
+    display: flex;
+    justify-content: row;
+    height: 80vh;
+}
+
+.create-activity {
+    height: 28rem;
+    width: 30rem;
+    background-color: #000d;
+    color: #fff;
+    border: .12rem solid #fff;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+.element-create {
+    height: 3rem;
+}
+
+.element-create .label {
+    font-size: 1.5rem;
+}
+
+.button-back {
+    height: 2.5rem;
+    width: 5rem;
+    background: #000c;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: 2rem;
+    font-size: 1rem;
+}
+
+.button-back:hover {
+    cursor: pointer;
+    background: #111e;
+    transition: .2s;
+}
+
+.button-create {
+    height: 2.5rem;
+    width: 5rem;
+    background: #000c;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: 2rem;
+    font-size: 1rem;
+    margin: 2rem;
+}
+
+.button-create:hover {
+    cursor: pointer;
+    background: #111c;
+    transition: .2s;
+}
+
+.span-title {
+    font-size: 2rem;
+}
+
+.list-countries {
+    transform: translate(160%, 0);
+    width: 21rem;
+    background-color: #fffd;
+    color: #000;
+    border: .2rem solid #fff;
+    border-radius: 1rem;
+    align-items: center;
+    position: fixed;
+}
+
+.country {
+    height: .6rem;
+}
+
+.button-delete {
+    height: 1.5rem;
+    width: 1.5rem;
+    background: #000c;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: 1rem;
+}
+
+.button-delete:hover {
+    cursor: pointer;
+    background: #111;
+}
+
+.error {
+    color: #f55;
+    font-size: 1rem;
+    transform: translate(0, -70%);
+}
+
+.element-create select {
+    font-size: 1rem;
+    background: #111;
+    color: #fff;
+}
+
+.element-create option {
+    font-size: 1rem;
+    background: #111;
+    color: #fff;
+}
+
+.element-create select:hover {
+    cursor: pointer;
+}

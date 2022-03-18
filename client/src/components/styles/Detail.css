@@ -1,8 +1,26 @@
-.button {
+.container-button {
     height: 10vh;
     display: flex;
     align-items: flex-end;
     justify-content: center;
+}
+
+.container-button button {
+    height: 2.5rem;
+    width: 6rem;
+    background: #000d;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: 2rem;
+    font-size: 1rem;
+    margin-left: 15rem;
+    margin-right: 15rem;
+}
+
+.container-button button:hover {
+    cursor: pointer;
+    background: #111e;
+    transition: .2s;
 }
 
 .container-detail {
@@ -12,7 +30,52 @@
     align-items: center;
 }
 
-.element-detail {
-    width: 50vh;
+.image-detail img {
+    border: .5rem solid #fff;
+}
+
+.country-detail {
     flex-direction: row;
+    height: 23rem;
+    width: 25rem;
+    background-color: #000d;
+    color: #fff;
+    border: .12rem solid #fff;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+.container-activity-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30rem;
+    background-color: #fffc;
+    color: #000;
+    border: .12rem solid #000;
+    border-radius: 1rem;
+}
+
+.activity-detail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.activity {
+    height: 9rem;
+    width: 9rem;
+    color: #fff;
+    background-color: #000d;
+    border: .1rem solid #fff;
+    margin-bottom: 1rem;
+}
+
+.activity h5 {
+    height: .1rem;
+}
+
+.loading {
+    color: #fff;
 }

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 export default function LandingPage() {
     return (
-        <div>
-            <h1>Go to travel</h1>
+        <div className="container-landingPage">
+            <h1 className="title">Go to travel</h1>
             <Link to="/home">
-                <button>Home</button>
+                <button className="button">Home</button>
             </Link>
         </div>
     );

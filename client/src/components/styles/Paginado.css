@@ -1,0 +1,23 @@
+.container-paginado .button {
+    font-size: 1rem;
+    margin-left: .2rem;
+    margin-right: .2rem;
+    height: 2rem;
+    width: 2rem;
+    background: #000c;
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: .5rem;
+}
+
+.container-paginado .button:hover {
+    cursor: pointer;
+    background: #111d;
+    transition: .2s;
+}
+
+.container-paginado .button:focus {
+    background: #fffd;
+    color: #000;
+    border: .1rem solid #000;
+}

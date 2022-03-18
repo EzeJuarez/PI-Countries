@@ -10,33 +10,33 @@ export const FILTER_SORT = "FILTER_SORT";
 export const FILTER_BY_POPULATION = "FILTER_BY_POPULATION";
 export const POST_ACTIVITY = "POST_ACTIVITY";
 
-// export const getAllCountries = () => dispatch => {
-//     return fetch("http://localhost:3001/countries")
-//     .then(res => res.json())
-//     .then(json => {
-//         dispatch({
-//             type: GET_ALL_COUNTRIES,
-//             payload: json,
-//         });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-// };
-
-export const getAllCountries = () => {
-    return async function(dispatch) {
-        try {
-            const json = await axios.get("http://localhost:3001/countries");
-            return dispatch({
-                type: GET_ALL_COUNTRIES,
-                payload: json.data,
-            });
-        }catch(err) {
-            console.log(err);
-        };
-    };
+export const getAllCountries = () => dispatch => {
+    return fetch("http://localhost:3001/countries")
+    .then(res => res.json())
+    .then(json => {
+        dispatch({
+            type: GET_ALL_COUNTRIES,
+            payload: json,
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 };
+
+// export const getAllCountries = () => {
+//     return async function(dispatch) {
+//         try {
+//             const json = await axios.get("http://localhost:3001/countries");
+//             return dispatch({
+//                 type: GET_ALL_COUNTRIES,
+//                 payload: json.data,
+//             });
+//         }catch(err) {
+//             console.log(err);
+//         };
+//     };
+// };
 
 // export const searchCountry = (name) => dispatch => {
 //     return fetch("http://localhost:3001/countries?name=" + name)
@@ -66,40 +66,12 @@ export const searchCountry = (name) => {
     };
 };
 
-// export const countryDetail = (cca3) => dispatch => {
-//     return fetch("http://localhost:3001/countries/" + cca3)
-//     .then(res => res.json())
-//     .then(json => {
-//         dispatch({
-//             type: GET_DETAIL,
-//             payload: json,
-//         });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-// };
-
-export const countryDetail = (cca3) => {
-    return async function(dispatch) {
-        try {
-            const json = await axios.get("http://localhost:3001/countries/" + cca3);
-            return dispatch({
-                type: GET_DETAIL,
-                payload: json.data,
-            });
-        }catch(err) {
-            console.log(err);
-        };
-    };
-};
-
-export const getActivities = () => dispatch => {
-    return fetch("http://localhost:3001/activities")
+export const countryDetail = (cca3) => dispatch => {
+    return fetch("http://localhost:3001/countries/" + cca3)
     .then(res => res.json())
     .then(json => {
         dispatch({
-            type: GET_ACTIVITIES,
+            type: GET_DETAIL,
             payload: json,
         });
     })
@@ -108,19 +80,47 @@ export const getActivities = () => dispatch => {
     });
 };
 
-// export const getActivities = () => {
+// export const countryDetail = (cca3) => {
 //     return async function(dispatch) {
 //         try {
-//             const json = await axios.get("http://localhost:3001/activities");
+//             const json = await axios.get("http://localhost:3001/countries/" + cca3);
 //             return dispatch({
-//                 type: GET_ACTIVITIES,
+//                 type: GET_DETAIL,
 //                 payload: json.data,
 //             });
-//         }catch (err) {
+//         }catch(err) {
 //             console.log(err);
 //         };
 //     };
 // };
+
+// export const getActivities = () => dispatch => {
+//     return fetch("http://localhost:3001/activities")
+//     .then(res => res.json())
+//     .then(json => {
+//         dispatch({
+//             type: GET_ACTIVITIES,
+//             payload: json,
+//         });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
+// };
+
+export const getActivities = () => {
+    return async function(dispatch) {
+        try {
+            const json = await axios.get("http://localhost:3001/activities");
+            return dispatch({
+                type: GET_ACTIVITIES,
+                payload: json.data,
+            });
+        }catch (err) {
+            console.log(err);
+        };
+    };
+};
 
 export const filterByContinent = (payload) => {
     return {

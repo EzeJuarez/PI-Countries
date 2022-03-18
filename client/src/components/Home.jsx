@@ -13,14 +13,14 @@ export default function Home() {
     const allActivities = useSelector(state => state.activities);
     const [ , setOrder ] = useState("");
     const [ currentPage, setCurrentPage ] = useState(1);
-    const [ countriesPerPage ] = useState(9);
+    const [ countriesPerPage ] = useState(10);
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
     let currentCountries = [];
     if(currentPage === 1) {
-        currentCountries = allCountries.slice(0, 10);
+        currentCountries = allCountries.slice(0, 9);
     }else {
-        currentCountries = allCountries.slice((indexOfFirstCountry + 1), (indexOfLastCountry + 1));
+        currentCountries = allCountries.slice((indexOfFirstCountry - 1), (indexOfLastCountry - 1));
     };
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -61,50 +61,70 @@ export default function Home() {
 
     return (
         <div>
-            <button onClick={e => {onClick(e)}}>Load all countries again</button>
-            <Link to="/activity"><button>Create activity</button></Link>
+            <div className="container-buttons">
+                <button onClick={e => {onClick(e)}} className="btn-1">Load all countries again</button>
+                <Link to="/activity"><button className="btn-2">Create activity</button></Link>
+            </div>
             <div className="container-filter">
                 <div className="filter">
-                    <span>Filter by continent</span>
-                    <select onChange={e => {handleFilterByContinent(e)}}>
-                        <option value="All">All</option>
-                        <option value="Africa">Africa</option>
-                        <option value="North America">North America</option>
-                        <option value="South America">South America</option>
-                        <option value="Antarctica">Antarctica</option>
-                        <option value="Asia">Asia</option>
-                        <option value="Europe">Europe</option>
-                        <option value="Oceania">Oceania</option>
-                    </select>
+                    <div>
+                        <span>Filter by continent</span>
+                        <select onChange={e => {handleFilterByContinent(e)}}>
+                            <option value="All">All</option>
+                            <option value="Africa">Africa</option>
+                            <option value="North America">North America</option>
+                            <option value="South America">South America</option>
+                            <option value="Antarctica">Antarctica</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="filter">
-                    <span>Filter by activity</span>
-                    <select onChange={e => {handleFilterByActivity(e)}}>
-                        <option value="All">All</option>
-                        { allActivities ? allActivities.map((e, i) => <option key={i} value={e.name}>{e.name}</option>) : <option>Not found</option> }
-                    </select>
+                    <div>
+                        <span>Filter by activity</span>
+                        <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
+                            <option disabled>Activities</option>
+                            { allActivities.length > 0 ?
+                                allActivities.map((e, i) => (
+                                    <option key={i} value={e.name}>{e.name}</option>)
+                                )
+                            : 
+                                <option disabled>Not found</option> 
+                            }
+                        </select>
+                    </div>
                 </div>
                 <div className="filter">
-                    <span>Filter by alphabet</span>
-                    <select onChange={e => {handleSort(e)}}>
-                        <option value="A-Z">A-Z</option>
-                        <option value="Z-A">Z-A</option>
-                    </select>
+                    <div>
+                        <span>Filter by alphabet</span>
+                        <select defaultValue="Order" onChange={e => {handleSort(e)}}>
+                            <option disabled>Order</option>
+                            <option value="A-Z">A-Z</option>
+                            <option value="Z-A">Z-A</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="filter">
-                    <span>Filter by population</span>
-                    <select onChange={e => {handleFilterByPopulation(e)}}>
-                        <option value="asc">Ascendent</option>
-                        <option value="des">Descendent</option>
-                    </select>
+                    <div>
+                        <span>Filter by population</span>
+                        <select defaultValue="Order" onChange={e => {handleFilterByPopulation(e)}}>
+                            <option disabled>Order</option>
+                            <option value="asc">Ascendent</option>
+                            <option value="des">Descendent</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div>
+            <div className="container-searchBar">
                 <SearchBar />
+            </div>
+            <div className="container-paginado">
                 <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
-                <div className="container-card">
-                    { currentCountries?.map((e, i) => <Link key={i} to={"/home/" + e.cca3}><Card key={e.cca3} cca3={e.cca3} name={e.name} image={e.flags[0]} continent={e.continent} population={e.population} /></Link>) }
-                </div>
+            </div>
+            <div className="container-card">
+                { currentCountries.map((e, i) => <Link key={i} to={"/home/" + e.cca3}><Card key={e.cca3} cca3={e.cca3} name={e.name} image={e.flags[0]} continent={e.continent} population={e.population} /></Link>) }
             </div>
         </div>
     );
