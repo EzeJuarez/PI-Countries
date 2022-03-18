@@ -24,34 +24,6 @@ export const getAllCountries = () => dispatch => {
     });
 };
 
-// export const getAllCountries = () => {
-//     return async function(dispatch) {
-//         try {
-//             const json = await axios.get("http://localhost:3001/countries");
-//             return dispatch({
-//                 type: GET_ALL_COUNTRIES,
-//                 payload: json.data,
-//             });
-//         }catch(err) {
-//             console.log(err);
-//         };
-//     };
-// };
-
-// export const searchCountry = (name) => dispatch => {
-//     return fetch("http://localhost:3001/countries?name=" + name)
-//     .then(res => res.json())
-//     .then(json => {
-//         dispatch({
-//             type: SEARCH_COUNTRY,
-//             payload: json,
-//         });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-// };
-
 export const searchCountry = (name) => {
     return async function(dispatch) {
         try {
@@ -79,34 +51,6 @@ export const countryDetail = (cca3) => dispatch => {
         console.log(err);
     });
 };
-
-// export const countryDetail = (cca3) => {
-//     return async function(dispatch) {
-//         try {
-//             const json = await axios.get("http://localhost:3001/countries/" + cca3);
-//             return dispatch({
-//                 type: GET_DETAIL,
-//                 payload: json.data,
-//             });
-//         }catch(err) {
-//             console.log(err);
-//         };
-//     };
-// };
-
-// export const getActivities = () => dispatch => {
-//     return fetch("http://localhost:3001/activities")
-//     .then(res => res.json())
-//     .then(json => {
-//         dispatch({
-//             type: GET_ACTIVITIES,
-//             payload: json,
-//         });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-// };
 
 export const getActivities = () => {
     return async function(dispatch) {
