@@ -22,7 +22,7 @@ export default function Home() {
     }else {
         currentCountries = allCountries.slice((indexOfFirstCountry - 1), (indexOfLastCountry - 1));
     };
-    const paginado = (pageNumber) => {
+    const paginado = pageNumber => {
         setCurrentPage(pageNumber);
     };
 
@@ -31,7 +31,7 @@ export default function Home() {
         dispatch(getActivities());
     }, [dispatch]);
 
-    function onClick(e) {
+    function handleLoad(e) {
         e.preventDefault();
         dispatch(getAllCountries());
     };
@@ -62,7 +62,7 @@ export default function Home() {
     return (
         <div>
             <div className="container-buttons">
-                <button onClick={e => {onClick(e)}} className="btn-1">Load all countries again</button>
+                <button onClick={e => {handleLoad(e)}} className="btn-1">Load all countries again</button>
                 <Link to="/activity"><button className="btn-2">Create activity</button></Link>
             </div>
             <div className="container-filter">
@@ -81,21 +81,32 @@ export default function Home() {
                         </select>
                     </div>
                 </div>
-                <div className="filter">
-                    <div>
-                        <span>Filter by activity</span>
-                        <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
-                            <option disabled>Activities</option>
-                            { allActivities.length > 0 ?
-                                allActivities.map((e, i) => (
-                                    <option key={i} value={e.name}>{e.name}</option>)
-                                )
-                            : 
-                                <option disabled>Not found</option> 
-                            }
-                        </select>
+                { allActivities.length > 0 ?
+                    <div className="filter">
+                        <div>
+                            <span>Filter by activity</span>
+                            <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
+                                <option disabled>Activities</option>
+                                <option value="All">All</option>
+                                    {
+                                        allActivities.map((e, i) => (
+                                            <option key={i} value={e.name}>{e.name}</option>
+                                        ))
+                                    }
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    :
+                    <div className="filter">
+                        <div>
+                            <span>Filter by activity</span>
+                            <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
+                                <option disabled>Activities</option>
+                                <option disabled>Not found</option>
+                            </select>
+                        </div>
+                    </div>
+                }
                 <div className="filter">
                     <div>
                         <span>Filter by alphabet</span>
@@ -124,7 +135,20 @@ export default function Home() {
                 <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
             </div>
             <div className="container-card">
-                { currentCountries.map((e, i) => <Link key={i} to={"/home/" + e.cca3}><Card key={e.cca3} cca3={e.cca3} name={e.name} image={e.flags[0]} continent={e.continent} population={e.population} /></Link>) }
+                {
+                    currentCountries.map((e, i) => (
+                        <Link key={i} to={"/home/" + e.cca3}>
+                            <Card
+                                key={e.cca3}
+                                cca3={e.cca3}
+                                name={e.name}
+                                image={e.flags[0]}
+                                continent={e.continent}
+                                population={e.population}
+                            />
+                        </Link>
+                    ))
+                }
             </div>
         </div>
     );

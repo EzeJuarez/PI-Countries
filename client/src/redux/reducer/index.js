@@ -31,19 +31,19 @@ const reducer = (state = initialState, action) => {
                 activities: action.payload,
             };
         case FILTER_BY_CONTINENT:
-            const filteredCountries = state.allCountries;
-            const continentFiltered = action.payload === "All" ? filteredCountries : filteredCountries.filter(e => e.continent === action.payload);
+            const allCountriesContinent = state.allCountries;
+            const continentFiltered = allCountriesContinent.filter(country => country.continent === action.payload);
             return {
                 ...state,
-                countries: continentFiltered,
+                countries: action.payload === "All" ? allCountriesContinent : continentFiltered,
             };
         case FILTER_BY_ACTIVITY:
-            const filteredCountries2 = state.allCountries;
-            const activityFiltered = filteredCountries2.filter(e => {
-                const activities = e.activities.map(el => el.name);
+            const allCountriesActivity = state.allCountries;
+            const activityFiltered = allCountriesActivity.filter(country => {
+                const activities = country.activities.map(activity => activity.name);
                 return activities.includes(action.payload);
             });
-            const countriesWithActivities = filteredCountries2.filter(e => e.activities.length > 0);
+            const countriesWithActivities = allCountriesActivity.filter(country => country.activities.length > 0);
             return {
                 ...state,
                 countries: action.payload === "All" ? countriesWithActivities : activityFiltered,
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
             const sortCountries = action.payload === "A-Z" ?
                 state.countries.sort((a, b) => {
                     if(a.name < b.name) {
-                        return -1;
+                        return - 1;
                     };
                     if(a.name > b.name) {
                         return 1;
@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
                         return 1;
                     };
                     if(a.name > b.name) {
-                        return -1;
+                        return - 1;
                     };
                     return 0;
                 });
@@ -76,7 +76,7 @@ const reducer = (state = initialState, action) => {
             const populationFiltered = action.payload === "asc" ?
                 state.countries.sort((a, b) => {
                     if(a.population < b.population) {
-                        return -1;
+                        return - 1;
                     };
                     if(a.population > b.population) {
                         return 1;
@@ -88,7 +88,7 @@ const reducer = (state = initialState, action) => {
                         return 1;
                     };
                     if(a.population > b.population) {
-                        return -1;
+                        return - 1;
                     };
                     return 0;
                 });

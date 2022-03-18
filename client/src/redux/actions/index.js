@@ -24,7 +24,7 @@ export const getAllCountries = () => dispatch => {
     });
 };
 
-export const searchCountry = (name) => {
+export const searchCountry = name => {
     return async function(dispatch) {
         try {
             const json = await axios.get("http://localhost:3001/countries?name=" + name);
@@ -38,7 +38,7 @@ export const searchCountry = (name) => {
     };
 };
 
-export const countryDetail = (cca3) => dispatch => {
+export const countryDetail = cca3 => dispatch => {
     return fetch("http://localhost:3001/countries/" + cca3)
     .then(res => res.json())
     .then(json => {
@@ -66,35 +66,35 @@ export const getActivities = () => {
     };
 };
 
-export const filterByContinent = (payload) => {
+export const filterByContinent = payload => {
     return {
         type: FILTER_BY_CONTINENT,
         payload,
     };
 };
 
-export const filterByActivity = (payload) => {
+export const filterByActivity = payload => {
     return {
         type: FILTER_BY_ACTIVITY,
         payload,
     };
 };
 
-export const filterSort = (payload) => {
+export const filterSort = payload => {
     return {
         type: FILTER_SORT,
         payload,
     };
 };
 
-export const filterByPopulation = (payload) => {
+export const filterByPopulation = payload => {
     return {
         type: FILTER_BY_POPULATION,
         payload,
     };
 };
 
-export const postActivity = (payload) => {
+export const postActivity = payload => {
     return async function() {
         const json = await axios.post("http://localhost:3001/activity", payload);
         return json;

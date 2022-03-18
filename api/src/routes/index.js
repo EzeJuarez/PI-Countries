@@ -30,23 +30,23 @@ const getCountriesInfo = async function() {
 
 router.get("/countries", async (req, res) => {
     const name = req.query.name;
-    const countries = await Country.findAll({ order: [ [ "name", "ASC" ] ] });
+    const countriesDb = await Country.findAll({ order: [ [ "name", "ASC" ] ] });
     const activitiesDb = await Activity.findAll();
-    if(countries.length > 0) {
+    if(countriesDb.length > 0) {
         if(name) {
-            const countryInfo = countries.filter(country => country.name.toLowerCase().includes(name.toLowerCase()));
+            const countryInfo = countriesDb.filter(country => country.name.toLowerCase().includes(name.toLowerCase()));
             if(countryInfo.length > 0) {
-                const detail = countryInfo.map(e => {
+                const detail = countryInfo.map(country => {
                     return {
-                        cca3: e.cca3,
-                        name: e.name,
-                        flags: e.flags,
-                        continent: e.continent,
-                        capital: e.capital,
-                        subregion: e.subregion,
-                        area: e.area,
-                        population: e.population,
-                        activities: activitiesDb.filter(el => el.country.includes(e.name)),
+                        cca3: country.cca3,
+                        name: country.name,
+                        flags: country.flags,
+                        continent: country.continent,
+                        capital: country.capital,
+                        subregion: country.subregion,
+                        area: country.area,
+                        population: country.population,
+                        activities: activitiesDb.filter(activity => activity.country.includes(country.name)),
                     };
                 });
                 res.status(200).json(detail);
@@ -54,20 +54,17 @@ router.get("/countries", async (req, res) => {
                 res.status(404).json({ msg: `No se encontró ningún país que coincida con el nombre: ${name}` });
             };
         }else {
-            const countryInfo = countries.map(e => {
+            const countries = countriesDb.map(country => {
                 return {
-                    cca3: e.cca3,
-                    name: e.name,
-                    flags: e.flags,
-                    continent: e.continent,
-                    capital: e.capital,
-                    subregion: e.subregion,
-                    area: e.area,
-                    population: e.population,
-                    activities: activitiesDb.filter(el => el.country.includes(e.name)),
+                    cca3: country.cca3,
+                    name: country.name,
+                    flags: country.flags,
+                    continent: country.continent,
+                    population: country.population,
+                    activities: activitiesDb.filter(activity => activity.country.includes(country.name)),
                 };
             });
-            res.status(200).json(countryInfo);
+            res.status(200).json(countries);
         };
     }else {
         res.status(404).json({ msg: "Ocurrió un error en la llamada de la información" });
@@ -76,23 +73,23 @@ router.get("/countries", async (req, res) => {
 
 router.get("/countries/:cca3", async (req, res) => {
     const { cca3 } = req.params;
-    const countries = await Country.findAll({ order: [ [ "name", "ASC" ] ] });
+    const countriesDb = await Country.findAll({ order: [ [ "name", "ASC" ] ] });
     const activitiesDb = await Activity.findAll();
-    if(countries.length > 0) {
+    if(countriesDb.length > 0) {
         if(cca3) {
-            const countryInfo = countries.filter(country => country.cca3.toLowerCase().includes(cca3.toLowerCase()));
+            const countryInfo = countriesDb.filter(country => country.cca3.toLowerCase().includes(cca3.toLowerCase()));
             if(countryInfo.length > 0) {
-                const detail = countryInfo.map(e => {
+                const detail = countryInfo.map(country => {
                     return {
-                        cca3: e.cca3,
-                        name: e.name,
-                        flags: e.flags,
-                        continent: e.continent,
-                        capital: e.capital,
-                        subregion: e.subregion,
-                        area: e.area,
-                        population: e.population,
-                        activities: activitiesDb.filter(el => el.country.includes(e.name)),
+                        cca3: country.cca3,
+                        name: country.name,
+                        flags: country.flags,
+                        continent: country.continent,
+                        capital: country.capital,
+                        subregion: country.subregion,
+                        area: country.area,
+                        population: country.population,
+                        activities: activitiesDb.filter(activity => activity.country.includes(country.name)),
                     };
                 });
                 res.status(200).json(detail);
@@ -100,6 +97,16 @@ router.get("/countries/:cca3", async (req, res) => {
                 res.status(404).json({ msg: `No se encontró ningún país que contenga el código: ${cca3}` });
             };
         }else {
+            const countries = countriesDb.map(country => {
+                return {
+                    cca3: country.cca3,
+                    name: country.name,
+                    flags: country.flags,
+                    continent: country.continent,
+                    population: country.population,
+                    activities: activitiesDb.filter(activity => activity.country.includes(country.name)),
+                };
+            });
             res.status(200).json(countries);
         };
     }else {
@@ -124,8 +131,8 @@ router.post("/activity", async (req, res) => {
 });
 
 router.get("/activities", async (req, res) => {
-    const actividades = await Activity.findAll();
-    res.status(200).json(actividades);
+    const activities = await Activity.findAll();
+    res.status(200).json(activities);
 });
 
 module.exports = router;
