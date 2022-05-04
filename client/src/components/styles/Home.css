@@ -97,3 +97,34 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.loading {
+    height: 7rem;
+    width: 20rem;
+    background-color: #aaae;
+    border: .2rem solid #fff;
+    border-radius: 1rem;
+    align-items: center;
+    margin: 2rem;
+}
+
+.loading p {
+    color: #000;
+    margin: 2rem;
+    font-size: 2rem;
+}
+
+.not-found {
+    height: 7rem;
+    width: 30rem;
+    background-color: #aaae;
+    border: .2rem solid #fff;
+    border-radius: 1rem;
+    align-items: center;
+    margin: 2rem;
+}
+
+.not-found p {
+    margin: 2rem;
+    font-size: 1.5rem;
+}

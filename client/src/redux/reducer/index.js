@@ -1,4 +1,4 @@
-import { GET_ALL_COUNTRIES, SEARCH_COUNTRY, GET_DETAIL, GET_ACTIVITIES, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, FILTER_SORT, FILTER_BY_POPULATION, POST_ACTIVITY } from "../actions";
+import { GET_ALL_COUNTRIES, SEARCH_COUNTRY, GET_DETAIL, CLEAR_DETAIL, GET_ACTIVITIES, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, FILTER_SORT, FILTER_BY_POPULATION, POST_ACTIVITY } from "../actions";
 
 const initialState = {
     countries: [],
@@ -21,6 +21,11 @@ const reducer = (state = initialState, action) => {
                 countries: action.payload,
             };
         case GET_DETAIL:
+            return {
+                ...state,
+                detail: action.payload,
+            };
+        case CLEAR_DETAIL:
             return {
                 ...state,
                 detail: action.payload,

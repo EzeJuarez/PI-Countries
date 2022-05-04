@@ -51,7 +51,7 @@ router.get("/countries", async (req, res) => {
                 });
                 res.status(200).json(detail);
             }else {
-                res.status(404).json({ msg: `No se encontró ningún país que coincida con el nombre: ${name}` });
+                res.status(404).json({ msg: `Not found a country with name: ${name}` });
             };
         }else {
             const countries = countriesDb.map(country => {
@@ -67,7 +67,7 @@ router.get("/countries", async (req, res) => {
             res.status(200).json(countries);
         };
     }else {
-        res.status(404).json({ msg: "Ocurrió un error en la llamada de la información" });
+        res.status(404).json({ msg: "Error to get information" });
     };
 });
 
@@ -94,7 +94,7 @@ router.get("/countries/:cca3", async (req, res) => {
                 });
                 res.status(200).json(detail);
             }else {
-                res.status(404).json({ msg: `No se encontró ningún país que contenga el código: ${cca3}` });
+                res.status(404).json({ msg: `Not found a country with code: ${cca3}` });
             };
         }else {
             const countries = countriesDb.map(country => {
@@ -110,7 +110,7 @@ router.get("/countries/:cca3", async (req, res) => {
             res.status(200).json(countries);
         };
     }else {
-        res.status(404).json({ msg: "Ocurrió un error en la llamada de la información" });
+        res.status(404).json({ msg: "Error to get information" });
     };
 });
 
@@ -127,7 +127,7 @@ router.post("/activity", async (req, res) => {
         where: { name: country },
     });
     newActivity.addCountries(countriesInDb);
-    res.status(200).json({ msg: "Actividad creada corectamente" });
+    res.status(200).json({ msg: "Activity created" });
 });
 
 router.get("/activities", async (req, res) => {

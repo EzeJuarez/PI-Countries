@@ -12,5 +12,15 @@ export default function Paginado({ countriesPerPage, allCountries, paginado }) {
         <nav>
             { pageNumbers?.map(number => <button key={number} onClick={() => paginado(number)} className="button">{number}</button>) }
         </nav>
+    //     <button
+    //     className={styles.button}
+    //     // si el numero de pagina es igual a 1 no se puede retroceder
+    //     onClick={() =>
+    //       setCurrentPage(currentPage === 1 ? currentPage : currentPage - 1)
+    //     }
+    //   >
+    //     {" "}
+    //     &#60;{" "}
+    //   </button>
     );
 };

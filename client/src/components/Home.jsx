@@ -16,14 +16,15 @@ export default function Home() {
     const [ countriesPerPage ] = useState(10);
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+    const paginado = pageNumber => {
+        setCurrentPage(pageNumber);
+    };
     let currentCountries = [];
+
     if(currentPage === 1) {
         currentCountries = allCountries.slice(0, 9);
     }else {
         currentCountries = allCountries.slice((indexOfFirstCountry - 1), (indexOfLastCountry - 1));
-    };
-    const paginado = pageNumber => {
-        setCurrentPage(pageNumber);
     };
 
     useEffect(() => {
@@ -41,17 +42,20 @@ export default function Home() {
         dispatch(filterByContinent(e.target.value));
         setCurrentPage(1);
     };
+
     function handleFilterByActivity(e) {
         e.preventDefault();
         dispatch(filterByActivity(e.target.value));
         setCurrentPage(1);
     };
+
     function handleSort(e) {
         e.preventDefault();
         dispatch(filterSort(e.target.value));
         setCurrentPage(1);
         setOrder(`Ordenado ${e.target.value}`);
     };
+
     function handleFilterByPopulation(e) {
         e.preventDefault();
         dispatch(filterByPopulation(e.target.value));
@@ -61,10 +65,12 @@ export default function Home() {
 
     return (
         <div>
+
             <div className="container-buttons">
                 <button onClick={e => {handleLoad(e)}} className="btn-1">Load all countries again</button>
                 <Link to="/activity"><button className="btn-2">Create activity</button></Link>
             </div>
+
             <div className="container-filter">
                 <div className="filter">
                     <div>
@@ -81,6 +87,7 @@ export default function Home() {
                         </select>
                     </div>
                 </div>
+
                 { allActivities.length > 0 ?
                     <div className="filter">
                         <div>
@@ -117,6 +124,7 @@ export default function Home() {
                         </select>
                     </div>
                 </div>
+
                 <div className="filter">
                     <div>
                         <span>Filter by population</span>
@@ -128,14 +136,22 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
             <div className="container-searchBar">
                 <SearchBar />
             </div>
+
             <div className="container-paginado">
                 <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
             </div>
+
             <div className="container-card">
-                {
+                {allCountries.length > 0 ?
+                    currentCountries[0].msg ?
+                        <div className="not-found">
+                            <p>{currentCountries[0].msg}</p>
+                        </div>
+                    :
                     currentCountries.map((e, i) => (
                         <Link key={i} to={"/home/" + e.cca3}>
                             <Card
@@ -148,6 +164,10 @@ export default function Home() {
                             />
                         </Link>
                     ))
+                :
+                    <div className="loading">
+                        <p>Loading</p>
+                    </div>
                 }
             </div>
         </div>

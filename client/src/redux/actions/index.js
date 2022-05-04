@@ -3,6 +3,7 @@ import axios from 'axios';
 export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
 export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY";
@@ -20,7 +21,10 @@ export const getAllCountries = () => dispatch => {
         });
     })
     .catch(err => {
-        console.log(err);
+        return dispatch({
+            type: GET_ALL_COUNTRIES,
+            payload: [err.response.data],
+        });
     });
 };
 
@@ -33,7 +37,10 @@ export const searchCountry = name => {
                 payload: json.data,
             });
         }catch(err) {
-            console.log(err);
+            return dispatch({
+                type: SEARCH_COUNTRY,
+                payload: [err.response.data],
+            });
         };
     };
 };
@@ -48,8 +55,18 @@ export const countryDetail = cca3 => dispatch => {
         });
     })
     .catch(err => {
-        console.log(err);
+        return dispatch({
+            type: GET_DETAIL,
+            payload: [err.response.data],
+        });
     });
+};
+
+export const clearDetail = () => {
+    return {
+        type: CLEAR_DETAIL,
+        payload: [],
+    };
 };
 
 export const getActivities = () => {
