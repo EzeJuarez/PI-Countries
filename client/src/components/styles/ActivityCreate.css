@@ -20,7 +20,7 @@
 .create-activity {
     height: 28rem;
     width: 30rem;
-    background-color: #000d;
+    background-color: #000;
     color: #fff;
     border: .12rem solid #fff;
     border-radius: 1rem;
@@ -38,7 +38,7 @@
 .button-back {
     height: 2.5rem;
     width: 5rem;
-    background: #000c;
+    background: #000e;
     color: #fff;
     border: .1rem solid #fff;
     border-radius: 2rem;
@@ -75,7 +75,7 @@
 .list-countries {
     transform: translate(160%, 0);
     width: 21rem;
-    background-color: #fffd;
+    background-color: #fffe;
     color: #000;
     border: .2rem solid #fff;
     border-radius: 1rem;

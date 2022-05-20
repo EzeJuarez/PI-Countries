@@ -8,7 +8,7 @@
 .container-button button {
     height: 2.5rem;
     width: 6rem;
-    background: #000d;
+    background: #000e;
     color: #fff;
     border: .1rem solid #fff;
     border-radius: 2rem;
@@ -38,7 +38,7 @@
     flex-direction: row;
     height: 23rem;
     width: 25rem;
-    background-color: #000d;
+    background-color: #000;
     color: #fff;
     border: .12rem solid #fff;
     border-radius: 1rem;
@@ -67,7 +67,7 @@
     height: 9rem;
     width: 9rem;
     color: #fff;
-    background-color: #000d;
+    background-color: #000;
     border: .1rem solid #fff;
     margin-bottom: 1rem;
 }
