@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
+import Filter from './Filter';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -67,74 +68,18 @@ export default function Home() {
         <div>
 
             <div className="container-buttons">
-                <button onClick={e => {handleLoad(e)}} className="btn-1">Load all countries again</button>
+                <button onClick={e => {handleLoad(e)}} className="btn-1">Load all countries</button>
                 <Link to="/activity"><button className="btn-2">Create activity</button></Link>
             </div>
 
-            <div className="container-filter">
-                <div className="filter">
-                    <div>
-                        <span>Filter by continent</span>
-                        <select onChange={e => {handleFilterByContinent(e)}}>
-                            <option value="All">All</option>
-                            <option value="Africa">Africa</option>
-                            <option value="North America">North America</option>
-                            <option value="South America">South America</option>
-                            <option value="Antarctica">Antarctica</option>
-                            <option value="Asia">Asia</option>
-                            <option value="Europe">Europe</option>
-                            <option value="Oceania">Oceania</option>
-                        </select>
-                    </div>
-                </div>
-
-                { allActivities.length > 0 ?
-                    <div className="filter">
-                        <div>
-                            <span>Filter by activity</span>
-                            <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
-                                <option disabled>Activities</option>
-                                <option value="All">All</option>
-                                    {
-                                        allActivities.map((e, i) => (
-                                            <option key={i} value={e.name}>{e.name}</option>
-                                        ))
-                                    }
-                            </select>
-                        </div>
-                    </div>
-                    :
-                    <div className="filter">
-                        <div>
-                            <span>Filter by activity</span>
-                            <select defaultValue="Activities" onChange={e => {handleFilterByActivity(e)}}>
-                                <option disabled>Activities</option>
-                                <option disabled>Not found</option>
-                            </select>
-                        </div>
-                    </div>
-                }
-                <div className="filter">
-                    <div>
-                        <span>Filter by alphabet</span>
-                        <select defaultValue="Order" onChange={e => {handleSort(e)}}>
-                            <option disabled>Order</option>
-                            <option value="A-Z">A-Z</option>
-                            <option value="Z-A">Z-A</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="filter">
-                    <div>
-                        <span>Filter by population</span>
-                        <select defaultValue="Order" onChange={e => {handleFilterByPopulation(e)}}>
-                            <option disabled>Order</option>
-                            <option value="asc">Ascendent</option>
-                            <option value="des">Descendent</option>
-                        </select>
-                    </div>
-                </div>
+            <div>
+                <Filter
+                    allActivities={allActivities}
+                    handleFilterByContinent={handleFilterByContinent}
+                    handleFilterByActivity={handleFilterByActivity}
+                    handleSort={handleSort}
+                    handleFilterByPopulation={handleFilterByPopulation}
+                />
             </div>
 
             <div className="container-searchBar">
@@ -142,7 +87,13 @@ export default function Home() {
             </div>
 
             <div className="container-paginado">
-                <Paginado countriesPerPage={countriesPerPage} allCountries={allCountries.length} paginado={paginado} />
+                <Paginado
+                    countriesPerPage={countriesPerPage}
+                    allCountries={allCountries.length}
+                    paginado={paginado}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                />
             </div>
 
             <div className="container-card">
