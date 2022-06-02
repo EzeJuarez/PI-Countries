@@ -11,13 +11,23 @@ export default function Paginado({ countriesPerPage, allCountries, paginado, set
 
     return (
         <nav>
+
             <button className="button-prev-next" onClick={() => setCurrentPage(currentPage === 1 ? currentPage : currentPage - 1)}>
                 {"< prev"}
             </button>
-            { pageNumbers?.map(number => <button className="button" key={number} onClick={() => paginado(number)}>{number}</button>) }
+
+            {
+                pageNumbers?.map(number => <button
+                    key={number}
+                    className={currentPage === number ? "active" : "button"}
+                    onClick={() => paginado(number)}
+                >{number}</button>)
+            }
+
             <button className="button-prev-next" onClick={() => setCurrentPage(currentPage === pages ? currentPage : currentPage + 1)}>
                 {"next >"}
             </button>
+
         </nav>
     );
 };

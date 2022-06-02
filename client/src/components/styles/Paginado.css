@@ -4,7 +4,7 @@
     margin-right: .2rem;
     height: 2rem;
     width: 2rem;
-    background: #000c;
+    background: #000d;
     color: #fff;
     border: .1rem solid #fff;
     border-radius: .5rem;
@@ -16,10 +16,16 @@
     transition: .2s;
 }
 
-.container-paginado .button:focus {
+.container-paginado .active {
+    font-size: 1rem;
+    margin-left: .2rem;
+    margin-right: .2rem;
+    height: 2rem;
+    width: 2rem;
     background: #fffd;
     color: #000;
     border: .1rem solid #000;
+    border-radius: .5rem;
 }
 
 .container-paginado .button-prev-next {
