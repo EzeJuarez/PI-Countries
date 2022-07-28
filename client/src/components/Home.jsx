@@ -7,6 +7,7 @@ import Card from './Card';
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
 import Filter from './Filter';
+import loading from './styles/img/plane.gif';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -86,38 +87,42 @@ export default function Home() {
                 <SearchBar />
             </div>
 
-            <div className="container-paginado">
-                <Paginado
-                    countriesPerPage={countriesPerPage}
-                    allCountries={allCountries.length}
-                    paginado={paginado}
-                    setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
-                />
-            </div>
 
-            <div className="container-card">
+            <div>
                 {allCountries.length > 0 ?
                     currentCountries[0].msg ?
                         <div className="not-found">
                             <p>{currentCountries[0].msg}</p>
                         </div>
                     :
-                    currentCountries.map((e, i) => (
-                        <Link key={i} to={"/home/" + e.cca3}>
-                            <Card
-                                key={e.cca3}
-                                cca3={e.cca3}
-                                name={e.name}
-                                image={e.flags[0]}
-                                continent={e.continent}
-                                population={e.population}
+                    <div>
+                        <div className="container-paginado">
+                            <Paginado
+                                countriesPerPage={countriesPerPage}
+                                allCountries={allCountries.length}
+                                paginado={paginado}
+                                setCurrentPage={setCurrentPage}
+                                currentPage={currentPage}
                             />
-                        </Link>
-                    ))
+                        </div>
+                        <div className="container-card">
+                            {currentCountries.map((e, i) => (
+                                <Link key={i} to={"/home/" + e.cca3}>
+                                    <Card
+                                        key={e.cca3}
+                                        cca3={e.cca3}
+                                        name={e.name}
+                                        image={e.flags[0]}
+                                        continent={e.continent}
+                                        population={e.population}
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 :
                     <div className="loading">
-                        <p>Loading</p>
+                        <img alt="loading" src={loading} />
                     </div>
                 }
             </div>

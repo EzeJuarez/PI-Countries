@@ -57,30 +57,19 @@
     align-items: center;
 }
 
-.loading {
-    height: 7rem;
+.loading img {
     width: 20rem;
-    background-color: #aaae;
-    border: .2rem solid #fff;
-    border-radius: 1rem;
-    align-items: center;
-    margin: 2rem;
-}
-
-.loading p {
-    color: #000;
-    margin: 2rem;
-    font-size: 2rem;
 }
 
 .not-found {
     height: 7rem;
     width: 30rem;
-    background-color: #aaae;
-    border: .2rem solid #fff;
+    background-color: #aaad;
+    border: .1rem solid #fff;
     border-radius: 1rem;
-    align-items: center;
     margin: 2rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .not-found p {

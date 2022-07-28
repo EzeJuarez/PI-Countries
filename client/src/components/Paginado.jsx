@@ -13,7 +13,7 @@ export default function Paginado({ countriesPerPage, allCountries, paginado, set
         <nav>
 
             <button className="button-prev-next" onClick={() => setCurrentPage(currentPage === 1 ? currentPage : currentPage - 1)}>
-                {"< prev"}
+                {"< Prev"}
             </button>
 
             {
@@ -25,7 +25,7 @@ export default function Paginado({ countriesPerPage, allCountries, paginado, set
             }
 
             <button className="button-prev-next" onClick={() => setCurrentPage(currentPage === pages ? currentPage : currentPage + 1)}>
-                {"next >"}
+                {"Next >"}
             </button>
 
         </nav>

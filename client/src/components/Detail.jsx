@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { clearDetail, countryDetail } from '../redux/actions';
+import loading from './styles/img/plane.gif';
 
 export default function Detail(props) {
     const dispatch = useDispatch();
@@ -60,7 +61,9 @@ export default function Detail(props) {
                     }
                 </div>
             :
-                <p className="loading">Loading...</p>
+                <div className="loading-detail">
+                    <img alt="loading" src={loading} />
+                </div>
             }
         </div>
     );
