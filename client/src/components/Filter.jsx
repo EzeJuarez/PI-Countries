@@ -1,4 +1,4 @@
-import './styles/Filter.css'
+import './styles/Filter.css';
 import React from 'react';
 
 export default function Filter({ allActivities, handleFilterByContinent, handleFilterByActivity, handleSort, handleFilterByPopulation }) {

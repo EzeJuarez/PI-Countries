@@ -1,5 +1,5 @@
 .card {
-    height: 23rem;
+    height: 22rem;
     width: 18rem;
     background-color: #aaae;
     border: .2rem solid #fff;
@@ -22,4 +22,75 @@
 a {
     text-decoration: none;
     color: #000;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .card {
+        height: 21rem;
+        width: 16rem;
+    }
+  
+    .card img {
+        height: 9rem;
+        width: 13rem;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    .card {
+      height: 19rem;
+      width: 14rem;
+    }
+  
+    .card img {
+      height: 7rem;
+      width: 11rem;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
+
+    .card {
+      height: 17rem;
+      width: 12rem;
+      margin: 1rem;
+    }
+
+    .card img {
+      height: 5rem;
+      width: 9rem;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+
+    .card {
+      height: 19rem;
+      width: 13rem;
+      margin: 2rem;
+    }
+
+    .card img {
+      height: 7rem;
+      width: 11rem;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .card {
+      width: 15rem;
+    }
+
+    .card img {
+      height: 7rem;
+      width: 11rem;
+    }
+
 }

@@ -35,3 +35,31 @@
     width: 20rem;
     transform: translate(0, -10%);
 }
+
+@media screen and (max-width: 600px) {
+
+    .searchBar {
+        width: 90%;
+    }
+
+    .search-button {
+        transform: translate(10%, -25%);
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .search-button {
+        transform: translate(10%, -25%);
+    }
+
+}
+
+@media screen and (max-width: 444px) {
+
+    .search-button {
+        transform: translate(10%, -85%);
+    }
+
+}
