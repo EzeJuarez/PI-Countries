@@ -15,7 +15,7 @@ export default function Detail(props) {
     }, [dispatch, props.match.params.cca3]);
 
     return (
-        <div>
+        <div className="container-detail-page">
 
             <div className="container-button">
                 <Link to="/home"><button>Back</button></Link>
@@ -25,7 +25,7 @@ export default function Detail(props) {
                 <div className="container-detail">
 
                     <div className="image-detail">
-                        <img alt ="img" src={myCountry[0].flags[1]} />
+                        <img alt="img" src={myCountry[0].flags[1]} />
                     </div>
 
                     <div className="country-detail">
