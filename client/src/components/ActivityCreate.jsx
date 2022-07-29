@@ -225,13 +225,12 @@ export default function ActivityCreate() {
                     </form>
                 </div>
 
-                {
-                    input.country &&
-                    <div className="list-countries">
-                        <span className="span-title">List of countries:</span>
-                        { input.country.map((e, i) => <p key={i} className="country">{e} <button value={e} onClick={e =>{onDelete(e)}} className="button-delete">x</button></p>) }
-                    </div>
-                }
+                <div className="list-countries">
+
+                    <span className="span-title">List of countries:</span>
+                    { input.country.map((e, i) => <p key={i} className="country">{e} <button value={e} onClick={e =>{onDelete(e)}} className="button-delete">x</button></p>) }
+
+                </div>
 
             </div>
         </div>
